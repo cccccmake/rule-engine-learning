@@ -8,9 +8,6 @@ import org.jeasy.rules.mvel.MVELRule;
 import org.mvel2.templates.TemplateRuntime;
 import utils.ExternalMethods;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static common.GlobalConstants.UTIL;
 
 public class TemplateDemo {
