@@ -27,11 +27,7 @@ public class TemplateDemo {
         rules.register(mvelRuleComparingPersonAge);
         engine.fire(rules, facts);
         String evalStr = "@{util.isPersonAOlderThanPersonB(personA, personB)}";
-        Map<String, Object> map = new HashMap<>();
-        map.put(UTIL, new ExternalMethods());
-        map.put("personA", personA);
-        map.put("personB", personB);
-        Boolean evalRes = (Boolean) TemplateRuntime.eval(evalStr, map);
+        Boolean evalRes = (Boolean) TemplateRuntime.eval(evalStr, facts.asMap());
         System.out.println(evalRes);
     }
 }
