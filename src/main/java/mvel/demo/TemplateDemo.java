@@ -5,7 +5,11 @@ import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.core.DefaultRulesEngine;
 import org.jeasy.rules.mvel.MVELRule;
+import org.mvel2.templates.TemplateRuntime;
 import utils.ExternalMethods;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static common.GlobalConstants.UTIL;
 
@@ -22,5 +26,12 @@ public class TemplateDemo {
         MVELRule mvelRuleComparingPersonAge = new MVELRule().name("mvel rule comparing person age").when("util.isPersonAOlderThanPersonB(personB, personA)").then("System.out.println(true);");
         rules.register(mvelRuleComparingPersonAge);
         engine.fire(rules, facts);
+        String evalStr = "@{util.isPersonAOlderThanPersonB(personA, personB)}";
+        Map<String, Object> map = new HashMap<>();
+        map.put(UTIL, new ExternalMethods());
+        map.put("personA", personA);
+        map.put("personB", personB);
+        Boolean evalRes = (Boolean) TemplateRuntime.eval(evalStr, map);
+        System.out.println(evalRes);
     }
 }
